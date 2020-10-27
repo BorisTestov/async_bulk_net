@@ -16,7 +16,7 @@ Ninth homework in Otus cpp course
 Поскольку не предполагается отправка данных от сервера клиенту в ответ на команды, 
 основное взаимодействие будет вокруг методов **async_read** и **async_accept**.
 
-###Порядок запуска:
+### Порядок запуска:
 
 ```
 bulk_server <port> <bulk_size>
@@ -31,7 +31,7 @@ bulk_server <port> <bulk_size>
 Однако команды из динамических блоков (ограниченные символами **{** и **}**)из разных соединений 
 смешиваться не должны.
 
-###Пример запуска команд:
+### Пример запуска команд:
 ```
 bulk_server 9000 3
 ```
@@ -90,7 +90,7 @@ bulk: 18, 19
 Будет  отмечена  способность  не  терять команды,полученные непосредственно перед закрытием 
 соединения клиентом.
 
-##CI/CD
+## CI/CD
 Github: https://github.com/BorisTestov/async_bulk_net <br>
 Bintray: https://bintray.com/boristestov/async_bulk_net/main <br>
 Travis: https://travis-ci.com/github/BorisTestov/async_bulk_net <br>
