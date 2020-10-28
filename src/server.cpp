@@ -7,7 +7,9 @@ Server::Server(boost::asio::io_service& io_service,
     _socket(io_service),
     _clients(),
     _stream(stream)
-{}
+{
+    accept();
+}
 
 void Server::accept()
 {

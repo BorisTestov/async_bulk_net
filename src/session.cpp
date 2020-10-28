@@ -22,6 +22,7 @@ void Session::read()
     boost::asio::async_read(_socket,
                             boost::asio::buffer(&_symbol, 1),
                             [this, self](boost::system::error_code errorCode, std::size_t length) {
+                                (void) length;
                                 if (not errorCode)
                                 {
                                     if ('\n' != _symbol)
@@ -35,8 +36,10 @@ void Session::read()
 
                                         if ("{" == _read_line)
                                         {
-                                            if (0 == _blockCounter)
+                                            if (_blockCounter == 0)
+                                            {
                                                 _processor.parseCommand(_read_line);
+                                            }
                                             ++_blockCounter;
                                         }
                                         else if ("}" == _read_line)
@@ -44,10 +47,14 @@ void Session::read()
                                             _processor.parseCommand(_read_line);
                                             --_blockCounter;
                                         }
-                                        else if (0 == _blockCounter)
+                                        else if (_blockCounter == 0)
+                                        {
                                             _stream->commonInput(_read_line);
+                                        }
                                         else
+                                        {
                                             _processor.parseCommand(_read_line);
+                                        }
                                         _read_line.clear();
                                     }
                                     read();
@@ -58,7 +65,6 @@ void Session::read()
                                     _socket.close();
                                     if (_container.empty())
                                         _stream->flush();
-                                    std::cerr << "Error: " << errorCode.message() << ", error length " << length << std::endl;
                                 }
                             });
 }
