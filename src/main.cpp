@@ -16,6 +16,7 @@ int main(int argc, char** argv)
 
     int port = std::stoi(argv[1]);
     int bulk_size = std::stoi(argv[2]);
+    std::cout << "Listening on port " << port << ", bulk size " << bulk_size << std::endl;
 
     boost::asio::ip::tcp::endpoint ep(boost::asio::ip::tcp::v4(), port);
     boost::asio::io_service service;

@@ -6,9 +6,7 @@ Session::Session(boost::asio::ip::tcp::socket socket,
     _socket(std::move(socket)),
     _read_line(""),
     _container(container),
-    _stream(stream),
-    _blockCounter(0),
-    _processor(this)
+    _stream(stream)
 {}
 
 void Session::start()
@@ -32,29 +30,10 @@ void Session::read()
                                     else
                                     {
                                         if ('\r' == _read_line.back())
+                                        {
                                             _read_line.pop_back();
-
-                                        if ("{" == _read_line)
-                                        {
-                                            if (_blockCounter == 0)
-                                            {
-                                                _processor.parseCommand(_read_line);
-                                            }
-                                            ++_blockCounter;
                                         }
-                                        else if ("}" == _read_line)
-                                        {
-                                            _processor.parseCommand(_read_line);
-                                            --_blockCounter;
-                                        }
-                                        else if (_blockCounter == 0)
-                                        {
-                                            _stream->commonInput(_read_line);
-                                        }
-                                        else
-                                        {
-                                            _processor.parseCommand(_read_line);
-                                        }
+                                        _stream->commonInput(_read_line);
                                         _read_line.clear();
                                     }
                                     read();

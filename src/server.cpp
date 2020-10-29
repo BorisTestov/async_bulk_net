@@ -21,10 +21,6 @@ void Server::accept()
                 _clients.insert(session_new);
                 session_new->start();
             }
-            else
-            {
-                std::cerr << "Error: " << errorCode.message() << std::endl;
-            }
             accept();
         });
 }

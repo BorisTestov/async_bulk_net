@@ -1,5 +1,3 @@
-find_package(Qt5 REQUIRED COMPONENTS Test)
-
 file(GLOB TEST_SOURCES "${SRC_DIR}/*.cpp" "${SRC_DIR}/tests/*.cpp")
 file(GLOB TEST_HEADERS
         "${INCLUDE_DIR}/*.h" "${INCLUDE_DIR}/*.hpp")

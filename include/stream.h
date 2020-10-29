@@ -21,5 +21,6 @@ public:
 
 private:
     CommandProcessor _processor;
+    BlockProcessor _blockProcessor;
     std::mutex _mutex;
 };

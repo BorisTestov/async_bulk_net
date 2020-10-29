@@ -1,6 +1,7 @@
 #pragma once
 
 #include "block_processor.h"
+#include "command_processor.h"
 #include "stream.h"
 
 #include <boost/asio.hpp>
@@ -24,6 +25,4 @@ private:
     std::string _read_line;
     std::set<std::shared_ptr<Session>>& _container;
     std::shared_ptr<Stream> _stream;
-    size_t _blockCounter;
-    BlockProcessor _processor;
 };
